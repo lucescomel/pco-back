@@ -21,4 +21,30 @@ class DefaultController extends AbstractController
 
         return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
+
+    // #[Route('/api/reset-password', name: 'reset-password')]
+    // public function resetPassword(Request $request)
+    // {
+    //     $entityManager = $this->getDoctrine()->getManager();
+
+    //     // Get the email address submitted by the user
+    //     $email = $request->request->get('email');
+
+    //     // Check if a photographer with the submitted email address exists in the database
+    //     $photographer = $entityManager->getRepository(Photographer::class)->findOneBy(['email' => $email]);
+
+    //     if (!$photographer) {
+    //         // If no photographer is found, return an error message
+    //         return $this->json(['message' => 'No photographer found with this email address.'], 404);
+    //     }
+
+
+    //     $entityManager->flush();
+
+    //     // Send an email to the photographer with the new password
+    //     // Code for sending the email goes here...
+
+    //     // Return a success message
+    //     return $this->json(['message' => 'Password reset successfully.']);
+    // }
 }
