@@ -14,32 +14,32 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new Photographers();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+    // #[Route('/register', name: 'app_register')]
+    // public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    // {
+    //     $user = new Photographers();
+    //     $form = $this->createForm(RegistrationFormType::class, $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         // encode the plain password
+    //         $user->setPassword(
+    //             $userPasswordHasher->hashPassword(
+    //                 $user,
+    //                 $form->get('plainPassword')->getData()
+    //             )
+    //         );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
+    //         // do anything else you need here, like send an email
 
-            // rediriger l'utilisateur vers la page de connexion
-            return $this->redirectToRoute('app_login');
-        }
+    //         // rediriger l'utilisateur vers la page de connexion
+    //         return $this->redirectToRoute('app_login');
+    //     }
 
-        return $this->render('inscription/inscription.html.twig', [
-            'inscriptionForm' => $form->createView(),
-        ]);
-    }
+    //     return $this->render('inscription/inscription.html.twig', [
+    //         'inscriptionForm' => $form->createView(),
+    //     ]);
+    // }
 }

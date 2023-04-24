@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -22,29 +23,18 @@ class DefaultController extends AbstractController
         return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
 
-    // #[Route('/api/reset-password', name: 'reset-password')]
-    // public function resetPassword(Request $request)
-    // {
-    //     $entityManager = $this->getDoctrine()->getManager();
+    #[Route("api/register", name: "register", methods: ['POST'])]
 
-    //     // Get the email address submitted by the user
-    //     $email = $request->request->get('email');
+    public function register(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new Photographers();
+        $user->setEmail($request->get('email'));
+        $user->setRoles(['ROLE_PHOTOGRAPHER']);
+        $user->setPassword($passwordHasher->hashPassword($user, $request->get('password')));
 
-    //     // Check if a photographer with the submitted email address exists in the database
-    //     $photographer = $entityManager->getRepository(Photographer::class)->findOneBy(['email' => $email]);
+        $entityManager->persist($user);
+        $entityManager->flush();
 
-    //     if (!$photographer) {
-    //         // If no photographer is found, return an error message
-    //         return $this->json(['message' => 'No photographer found with this email address.'], 404);
-    //     }
-
-
-    //     $entityManager->flush();
-
-    //     // Send an email to the photographer with the new password
-    //     // Code for sending the email goes here...
-
-    //     // Return a success message
-    //     return $this->json(['message' => 'Password reset successfully.']);
-    // }
+        return new Response('Photographe created', Response::HTTP_CREATED);
+    }
 }
