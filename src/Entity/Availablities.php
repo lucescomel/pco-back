@@ -18,11 +18,11 @@ class Availablities
 
     #[ORM\Column]
     private ?int $day = null;
-    
-    #[ORM\Column]
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $free_start = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $free_end = null;
 
     #[ORM\ManyToOne(inversedBy: 'availablities')]
