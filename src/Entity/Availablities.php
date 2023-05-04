@@ -18,9 +18,11 @@ class Availablities
 
     #[ORM\Column]
     private ?int $day = null;
-
+    
+    #[ORM\Column]
     private ?\DateTimeInterface $free_start = null;
 
+    #[ORM\Column]
     private ?\DateTimeInterface $free_end = null;
 
     #[ORM\ManyToOne(inversedBy: 'availablities')]
