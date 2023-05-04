@@ -20,10 +20,10 @@ class Availablities
     private ?int $day = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $free_start = null;
+    private ?\DateTimeImmutable $free_start = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTime $free_end = null;
+    private ?\DateTimeImmutable $free_end = null;
 
     #[ORM\ManyToOne(inversedBy: 'availablities')]
     #[ORM\JoinColumn(nullable: false)]
