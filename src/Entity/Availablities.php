@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\AvailablitiesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 #[ORM\Entity(repositoryClass: AvailablitiesRepository::class)]
 #[ApiResource]
@@ -17,7 +18,7 @@ class Availablities
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $day = null;
+    private ?Date $day = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $free_start = null;
