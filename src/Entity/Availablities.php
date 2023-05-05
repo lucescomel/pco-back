@@ -18,7 +18,7 @@ class Availablities
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?Date $day = null;
+    private ?int $day = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $free_start = null;
